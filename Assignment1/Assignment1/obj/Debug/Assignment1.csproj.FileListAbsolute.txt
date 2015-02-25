@@ -1,0 +1,9 @@
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Debug\Assignment1.exe.config
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Debug\Assignment1.exe
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Debug\Assignment1.pdb
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\obj\Debug\Assignment1.csprojResolveAssemblyReference.cache
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\obj\Debug\Assignment1.exe
+c:\users\pete\documents\visual studio 2013\Projects\Assignment1\Assignment1\obj\Debug\Assignment1.pdb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment1\Assignment1\bin\Debug\Assignment1.exe.config
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment1\Assignment1\obj\Debug\Assignment1.exe
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment1\Assignment1\obj\Debug\Assignment1.pdb
