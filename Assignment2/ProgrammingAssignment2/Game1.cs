@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace ProgrammingAssignment2
 {
@@ -22,11 +16,15 @@ namespace ProgrammingAssignment2
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		// STUDENTS: declare variables for three sprites
+		Texture2D sprite0;
+		Rectangle spriteLocation0;
+		Texture2D sprite1;
+		Rectangle spriteLocation1;
+		Texture2D sprite2;
+		Rectangle spriteLocation2;
 
-
-		// STUDENTS: declare variables for x and y speeds
-
+		int xVelocity;
+		int yVelocity;
 
 		// used to handle generating random values
 		Random rand = new Random();
@@ -68,11 +66,11 @@ namespace ProgrammingAssignment2
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// STUDENTS: load the sprite images here
+			sprite0 = Content.Load<Texture2D>("cargoship");
+			sprite1 = Content.Load<Texture2D>("carrier");
+			sprite2 = Content.Load<Texture2D>("destroyer");
 
-
-			// STUDENTS: set the currentSprite variable to one of your sprite variables
-
+			currentSprite = sprite0;
 		}
 
 		/// <summary>
@@ -102,39 +100,42 @@ namespace ProgrammingAssignment2
 
 				// STUDENTS: uncomment the code below and make it generate a random number 
 				// between 0 and 2 inclusive using the rand field I provided
-				//int spriteNumber = ;
+				int spriteNumber = rand.Next(0, 2);
 
 				// sets current sprite
 				// STUDENTS: uncomment the lines below and change sprite0, sprite1, and sprite2
 				//      to the three different names of your sprite variables
-				//if (spriteNumber == 0)
-				//{
-				//    currentSprite = sprite0;
-				//}
-				//else if (spriteNumber == 1)
-				//{
-				//    currentSprite = sprite1;
-				//}
-				//else if (spriteNumber == 2)
-				//{
-				//    currentSprite = sprite2;
-				//}
+				if (spriteNumber == 0)
+				{
+					currentSprite = sprite0;
+				}
+				else if (spriteNumber == 1)
+				{
+					currentSprite = sprite1;
+				}
+				else if (spriteNumber == 2)
+				{
+					currentSprite = sprite2;
+				}
 
-				// STUDENTS: set the drawRectangle.Width and drawRectangle.Height to match the width and height of currentSprite
-
+				drawRectangle.Width = currentSprite.Width;
+				drawRectangle.Height = currentSprite.Height;
 
 				// STUDENTS: center the draw rectangle in the window. Note that the X and Y properties of the rectangle
 				// are for the upper left corner of the rectangle, not the center of the rectangle
-
+				drawRectangle.X = (graphics.PreferredBackBufferWidth / 2) - (currentSprite.Width / 2);
+				drawRectangle.Y = (graphics.PreferredBackBufferHeight / 2) - (currentSprite.Height / 2);
 
 				// STUDENTS: write code below to generate random numbers  between -4 and 4 inclusive for the x and y speed 
 				// using the rand field I provided
 				// CAUTION: Don't redeclare the x speed and y speed variables here!
-
+				xVelocity = rand.Next(-4, 4);
+				yVelocity = rand.Next(-4, 4);
 			}
 
 			// STUDENTS: move the drawRectangle by the x speed and the y speed
-
+			drawRectangle.X = drawRectangle.X + xVelocity;
+			drawRectangle.Y = drawRectangle.Y + yVelocity;
 
 			base.Update(gameTime);
 		}
@@ -147,8 +148,11 @@ namespace ProgrammingAssignment2
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// STUDENTS: draw current sprite here
+			spriteBatch.Begin();
 
+			spriteBatch.Draw(currentSprite, drawRectangle, Color.White);
+
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

@@ -1,0 +1,9 @@
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\bin\x86\Debug\Content\cargoship.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\bin\x86\Debug\Content\carrier.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\bin\x86\Debug\Content\destroyer.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\bin\x86\Debug\ProgrammingAssignment2.exe
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\bin\x86\Debug\ProgrammingAssignment2.pdb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\obj\x86\Debug\ProgrammingAssignment2.csprojResolveAssemblyReference.cache
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\obj\x86\Debug\ProgrammingAssignment2.exe
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment2\ProgrammingAssignment2\obj\x86\Debug\ProgrammingAssignment2.pdb
