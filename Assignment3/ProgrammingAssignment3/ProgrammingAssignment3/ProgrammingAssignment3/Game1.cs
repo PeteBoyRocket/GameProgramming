@@ -1,217 +1,225 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace ProgrammingAssignment3
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
-    {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+	/// <summary>
+	/// This is the main type for your game
+	/// </summary>
+	public class Game1 : Microsoft.Xna.Framework.Game
+	{
+		GraphicsDeviceManager graphics;
+		SpriteBatch spriteBatch;
 
-        const int WINDOW_WIDTH = 800;
-        const int WINDOW_HEIGHT = 600;
+		const int WINDOW_WIDTH = 800;
+		const int WINDOW_HEIGHT = 600;
 
-        Random rand = new Random();
-        Vector2 centerLocation = new Vector2(
-            WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		Random rand = new Random();
+		Vector2 centerLocation = new Vector2(
+			WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 
-        // STUDENTS: declare variables for 3 rock sprites
+		// STUDENTS: declare variables for 3 rock sprites
+		private Texture2D _greenRock;
+		private Texture2D _magentaRock;
+		private Texture2D _whiteRock;
 
-        // STUDENTS: declare variables for 3 rocks
+		// STUDENTS: declare variables for 3 rocks
+		private Rock _rock0;
+		private Rock _rock1;
+		private Rock _rock2;
 
-        // delay support
-        const int TOTAL_DELAY_MILLISECONDS = 1000;
-        int elapsedDelayMilliseconds = 0;
+		// delay support
+		const int TOTAL_DELAY_MILLISECONDS = 1000;
+		int elapsedDelayMilliseconds = 0;
 
-        // random velocity support
-        const float BASE_SPEED = 0.15f;
-        Vector2 upLeft = new Vector2(-BASE_SPEED, -BASE_SPEED);
-        Vector2 upRight = new Vector2(BASE_SPEED, -BASE_SPEED);
-        Vector2 downRight = new Vector2(BASE_SPEED, BASE_SPEED);
-        Vector2 downLeft = new Vector2(-BASE_SPEED, BASE_SPEED);
+		// random velocity support
+		const float BASE_SPEED = 0.15f;
+		Vector2 upLeft = new Vector2(-BASE_SPEED, -BASE_SPEED);
+		Vector2 upRight = new Vector2(BASE_SPEED, -BASE_SPEED);
+		Vector2 downRight = new Vector2(BASE_SPEED, BASE_SPEED);
+		Vector2 downLeft = new Vector2(-BASE_SPEED, BASE_SPEED);
 
-        public Game1()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+		public Game1()
+		{
+			graphics = new GraphicsDeviceManager(this);
+			Content.RootDirectory = "Content";
 
-            // change resolution
-            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
-            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
-        }
+			// change resolution
+			graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+			graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+		}
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
+		/// <summary>
+		/// Allows the game to perform any initialization it needs to before starting to run.
+		/// This is where it can query for any required services and load any non-graphic
+		/// related content.  Calling base.Initialize will enumerate through any components
+		/// and initialize them as well.
+		/// </summary>
+		protected override void Initialize()
+		{
+			// TODO: Add your initialization logic here
 
-            base.Initialize();
-        }
+			base.Initialize();
+		}
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+		/// <summary>
+		/// LoadContent will be called once per game and is the place to load
+		/// all of your content.
+		/// </summary>
+		protected override void LoadContent()
+		{
+			// Create a new SpriteBatch, which can be used to draw textures.
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // STUDENTS: Load content for 3 sprites
+			// STUDENTS: Load content for 3 sprites
+			_greenRock = Content.Load<Texture2D>("greenrock");
+			_magentaRock = Content.Load<Texture2D>("magentarock");
+			_whiteRock = Content.Load<Texture2D>("whiterock");
 
-            // STUDENTS: Create a new random rock by calling the GetRandomRock method
+			// STUDENTS: Create a new random rock by calling the GetRandomRock method
+			_rock0 = GetRandomRock();
+			_rock1 = GetRandomRock();
+			_rock2 = GetRandomRock();
+		}
 
-        }
+		/// <summary>
+		/// UnloadContent will be called once per game and is the place to unload
+		/// all content.
+		/// </summary>
+		protected override void UnloadContent()
+		{
+			// TODO: Unload any non ContentManager content here
+		}
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+		/// <summary>
+		/// Allows the game to run logic such as updating the world,
+		/// checking for collisions, gathering input, and playing audio.
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		protected override void Update(GameTime gameTime)
+		{
+			// Allows the game to exit
+			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+				this.Exit();
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
-        {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+			// STUDENTS: update rocks
+			_rock0.Update(gameTime);
+			_rock1.Update(gameTime);
+			_rock2.Update(gameTime);
 
-            // STUDENTS: update rocks
+			// update timer
+			elapsedDelayMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
+			if (elapsedDelayMilliseconds >= TOTAL_DELAY_MILLISECONDS)
+			{
+				// STUDENTS: timer expired, so spawn new rock if fewer than 3 rocks in window
 
+				// restart timer
+				elapsedDelayMilliseconds = 0;
+			}
 
-            // update timer
-            elapsedDelayMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
-            if (elapsedDelayMilliseconds >= TOTAL_DELAY_MILLISECONDS)
-            {
-                // STUDENTS: timer expired, so spawn new rock if fewer than 3 rocks in window
+			// STUDENTS: Check each rock to see if it's outside the window. If so
+			// spawn a new random rock for it by calling the GetRandomRock method
+			// Caution: Only check the property if the variable isn't null
+			if (_rock0.OutsideWindow)
+			{
+				_rock0 = GetRandomRock();
+			}
 
-                // restart timer
-                elapsedDelayMilliseconds = 0;
-            }
+			if (_rock1.OutsideWindow)
+			{
+				_rock1 = GetRandomRock();
+			}
 
-            // STUDENTS: Check each rock to see if it's outside the window. If so
-            // spawn a new random rock for it by calling the GetRandomRock method
-            // Caution: Only check the property if the variable isn't null
+			if (_rock2.OutsideWindow)
+			{
+				_rock2 = GetRandomRock();
+			}
 
-            base.Update(gameTime);
-        }
+			base.Update(gameTime);
+		}
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+		/// <summary>
+		/// This is called when the game should draw itself.
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		protected override void Draw(GameTime gameTime)
+		{
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // STUDENTS: draw rocks
-            spriteBatch.Begin();
+			// STUDENTS: draw rocks
+			spriteBatch.Begin();
 
-            spriteBatch.End();
+			_rock0.Draw(spriteBatch);
+			_rock1.Draw(spriteBatch);
+			_rock2.Draw(spriteBatch);
 
-            base.Draw(gameTime);
-        }
+			spriteBatch.End();
 
-        /// <summary>
-        /// Gets a rock with a random sprite and velocity
-        /// </summary>
-        /// <returns>the rock</returns>
-        private Rock GetRandomRock()
-        {
-            // STUDENTS: Uncomment and complete the code below to randomly pick a rock sprite by calling the GetRandomSprite method
-            //Texture2D sprite = ;
+			base.Draw(gameTime);
+		}
 
-            // STUDENTS: Uncomment and complete the code below to randomly pick a velocity by calling the GetRandomVelocity method
-            //Vector2 velocity = ;
+		/// <summary>
+		/// Gets a rock with a random sprite and velocity
+		/// </summary>
+		/// <returns>the rock</returns>
+		private Rock GetRandomRock()
+		{
+			// STUDENTS: Uncomment and complete the code below to randomly pick a rock sprite by calling the GetRandomSprite method
+			Texture2D sprite = GetRandomSprite();
 
-            // STUDENTS: After completing the two lines of code above, delete the following two lines of code
-            // They're only included so the code I provided to you compiles
-            Texture2D sprite = null;
-            Vector2 velocity = Vector2.Zero;
+			// STUDENTS: Uncomment and complete the code below to randomly pick a velocity by calling the GetRandomVelocity method
+			Vector2 velocity = GetRandomVelocity();
 
-            // return a new rock, centered in the window, with the random sprite and velocity
-            return new Rock(sprite, centerLocation, velocity, WINDOW_WIDTH, WINDOW_HEIGHT);
-        }
+			// return a new rock, centered in the window, with the random sprite and velocity
+			return new Rock(sprite, centerLocation, velocity, WINDOW_WIDTH, WINDOW_HEIGHT);
+		}
 
-        /// <summary>
-        /// Gets a random sprite
-        /// </summary>
-        /// <returns>the sprite</returns>
-        private Texture2D GetRandomSprite()
-        {
-            // STUDENTS: Uncommment and modify the code below as appropriate to return 
-            // a random sprite
-            //int spriteNumber = ;
-            //if (spriteNumber == 0)
-            //{
-            //    return <put sprite variable name here (without < and >)>;
-            //}
-            //else if (spriteNumber == 1)
-            //{
-            //    return <put sprite variable name here (without < and >)>;
-            //}
-            //else
-            //{
-            //    return <put sprite variable name here (without < and >)>;
-            //}
+		/// <summary>
+		/// Gets a random sprite
+		/// </summary>
+		/// <returns>the sprite</returns>
+		private Texture2D GetRandomSprite()
+		{
+			// STUDENTS: Uncommment and modify the code below as appropriate to return 
+			// a random sprite
+			int spriteNumber = rand.Next(0, 2);
+			if (spriteNumber == 0)
+			{
+				return _greenRock;
+			}
+			else if (spriteNumber == 1)
+			{
+				return _magentaRock;
+			}
 
-            // STUDENTS: After completing the code above, delete the following line of code
-            // It's only included so the code I provided to you compiles
-            return null;
-        }
+			return _whiteRock;
+		}
 
-        /// <summary>
-        /// Gets a random velocity
-        /// </summary>
-        /// <returns>the velocity</returns>
-        private Vector2 GetRandomVelocity()
-        {
-            // STUDENTS: Uncommment and modify the code below as appropriate to return 
-            // a random velocity
-            //int velocityNumber = ;
-            //if (velocityNumber == 0)
-            //{
-            //    return upLeft;
-            //}
-            //else if (velocityNumber == 1)
-            //{
-            //    return upRight;
-            //}
-            //else if (velocityNumber == 2)
-            //{
-            //    return downRight;
-            //}
-            //else
-            //{
-            //    return downLeft;
-            //}
+		/// <summary>
+		/// Gets a random velocity
+		/// </summary>
+		/// <returns>the velocity</returns>
+		private Vector2 GetRandomVelocity()
+		{
+			// STUDENTS: Uncommment and modify the code below as appropriate to return 
+			// a random velocity
+			int velocityNumber = rand.Next(0, 3);
+			if (velocityNumber == 0)
+			{
+				return upLeft;
+			}
+			else if (velocityNumber == 1)
+			{
+				return upRight;
+			}
+			else if (velocityNumber == 2)
+			{
+				return downRight;
+			}
 
-            // STUDENTS: After completing the code above, delete the following line of code
-            // It's only included so the code I provided to you compiles
-            return Vector2.Zero;
-        }
-    }
+			return downLeft;
+		}
+	}
 }

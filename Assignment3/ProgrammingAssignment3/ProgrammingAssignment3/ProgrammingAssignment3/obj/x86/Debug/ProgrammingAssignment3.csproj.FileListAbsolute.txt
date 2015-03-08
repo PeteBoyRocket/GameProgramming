@@ -1,0 +1,9 @@
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\bin\x86\Debug\Content\greenrock.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\bin\x86\Debug\Content\magentarock.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\bin\x86\Debug\Content\whiterock.xnb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\bin\x86\Debug\ProgrammingAssignment3.exe
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\bin\x86\Debug\ProgrammingAssignment3.pdb
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\obj\x86\Debug\ProgrammingAssignment3.csprojResolveAssemblyReference.cache
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\obj\x86\Debug\ProgrammingAssignment3.exe
+C:\Users\Pete\Documents\GitHub\GameProgramming\Assignment3\ProgrammingAssignment3\ProgrammingAssignment3\ProgrammingAssignment3\obj\x86\Debug\ProgrammingAssignment3.pdb
