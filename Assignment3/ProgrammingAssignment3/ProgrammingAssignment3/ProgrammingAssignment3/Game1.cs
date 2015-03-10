@@ -80,8 +80,6 @@ namespace ProgrammingAssignment3
 
 			// STUDENTS: Create a new random rock by calling the GetRandomRock method
 			_rock0 = GetRandomRock();
-			_rock1 = GetRandomRock();
-			_rock2 = GetRandomRock();
 		}
 
 		/// <summary>
@@ -105,15 +103,39 @@ namespace ProgrammingAssignment3
 				this.Exit();
 
 			// STUDENTS: update rocks
-			_rock0.Update(gameTime);
-			_rock1.Update(gameTime);
-			_rock2.Update(gameTime);
+
+			if (_rock0 != null)
+			{
+				_rock0.Update(gameTime);
+			}
+
+			if (_rock1 != null)
+			{
+				_rock1.Update(gameTime);
+			}
+
+			if (_rock2 != null)
+			{
+				_rock2.Update(gameTime);
+			}
 
 			// update timer
 			elapsedDelayMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
 			if (elapsedDelayMilliseconds >= TOTAL_DELAY_MILLISECONDS)
 			{
 				// STUDENTS: timer expired, so spawn new rock if fewer than 3 rocks in window
+				if (_rock0 == null)
+				{
+					_rock0 = GetRandomRock();
+				}
+				else if (_rock1 == null)
+				{
+					_rock1 = GetRandomRock();
+				}
+				else if (_rock2 == null)
+				{
+					_rock2 = GetRandomRock();
+				}
 
 				// restart timer
 				elapsedDelayMilliseconds = 0;
@@ -122,17 +144,17 @@ namespace ProgrammingAssignment3
 			// STUDENTS: Check each rock to see if it's outside the window. If so
 			// spawn a new random rock for it by calling the GetRandomRock method
 			// Caution: Only check the property if the variable isn't null
-			if (_rock0.OutsideWindow)
+			if (_rock0 != null && _rock0.OutsideWindow)
 			{
 				_rock0 = GetRandomRock();
 			}
 
-			if (_rock1.OutsideWindow)
+			if (_rock1 != null && _rock1.OutsideWindow)
 			{
 				_rock1 = GetRandomRock();
 			}
 
-			if (_rock2.OutsideWindow)
+			if (_rock2 != null && _rock2.OutsideWindow)
 			{
 				_rock2 = GetRandomRock();
 			}
@@ -151,9 +173,20 @@ namespace ProgrammingAssignment3
 			// STUDENTS: draw rocks
 			spriteBatch.Begin();
 
-			_rock0.Draw(spriteBatch);
-			_rock1.Draw(spriteBatch);
-			_rock2.Draw(spriteBatch);
+			if (_rock0 != null)
+			{
+				_rock0.Draw(spriteBatch);
+			}
+
+			if (_rock1 != null)
+			{
+				_rock1.Draw(spriteBatch);
+			}
+
+			if (_rock2 != null)
+			{
+				_rock2.Draw(spriteBatch);
+			}
 
 			spriteBatch.End();
 
@@ -184,7 +217,7 @@ namespace ProgrammingAssignment3
 		{
 			// STUDENTS: Uncommment and modify the code below as appropriate to return 
 			// a random sprite
-			int spriteNumber = rand.Next(0, 2);
+			int spriteNumber = rand.Next(0, 3);
 			if (spriteNumber == 0)
 			{
 				return _greenRock;
@@ -205,7 +238,7 @@ namespace ProgrammingAssignment3
 		{
 			// STUDENTS: Uncommment and modify the code below as appropriate to return 
 			// a random velocity
-			int velocityNumber = rand.Next(0, 3);
+			int velocityNumber = rand.Next(0, 4);
 			if (velocityNumber == 0)
 			{
 				return upLeft;

@@ -110,11 +110,13 @@ namespace ProgrammingAssignment3
 			}
 
 			// STUDENTS: Update the rock's location
-			drawRectangle = new Rectangle((int)(drawRectangle.X + velocity.X), (int)(drawRectangle.Y + velocity.Y), sprite.Width, sprite.Height);
+			var newXPosition = drawRectangle.X + velocity.X * gameTime.ElapsedGameTime.Milliseconds;
+			var newYPosition = drawRectangle.Y + velocity.Y * gameTime.ElapsedGameTime.Milliseconds;
+			drawRectangle = new Rectangle((int)newXPosition, (int)newYPosition, sprite.Width, sprite.Height);
 
 			// STUDENTS: Set outsideWindow to true if the rock is outside the window
-			if (drawRectangle.X < 0 || drawRectangle.X > windowWidth ||
-				drawRectangle.Y < 0 || drawRectangle.Y > windowHeight)
+			if (newXPosition + sprite.Width < 0 || newXPosition > windowWidth ||
+				newYPosition + sprite.Height < 0 || newYPosition > windowHeight)
 			{
 				outsideWindow = true;
 			}
